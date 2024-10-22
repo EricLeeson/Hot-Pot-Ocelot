@@ -13,10 +13,10 @@ script = ExtResource("1_1sm2i")
 
 [node name="OcelotWalkAnimation" parent="." instance=ExtResource("2_xob6f")]
 unique_name_in_owner = true
-position = Vector2(16, 16)
 animation = &"Right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
-position = Vector2(16, 22)
 shape = SubResource("CircleShape2D_m8ynl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
