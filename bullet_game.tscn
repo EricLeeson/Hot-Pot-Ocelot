@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ffrd2npquunb"]
+
+[ext_resource type="PackedScene" uid="uid://c4yinprjl1ui4" path="res://player.tscn" id="1_sm0lf"]
+[ext_resource type="Texture2D" uid="uid://btx2vhqcr1maf" path="res://Grass.png" id="2_a7ibw"]
+[ext_resource type="PackedScene" uid="uid://dbylwf4vme53v" path="res://slime.tscn" id="3_yxjax"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("2_a7ibw")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="Ocelot_Player" parent="." instance=ExtResource("1_sm0lf")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_yxjax")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4yinprjl1ui4"]
+
+[ext_resource type="Script" path="res://playerMovement.gd" id="1_1sm2i"]
+[ext_resource type="PackedScene" uid="uid://dbaym8bse2f4v" path="res://Ocelot_Front_Walk.aseprite" id="2_xob6f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8ynl"]
+radius = 4.0
+
+[node name="Ocelot_Player" type="CharacterBody2D"]
+texture_filter = 1
+texture_repeat = 2
+script = ExtResource("1_1sm2i")
+
+[node name="OcelotWalkAnimation" parent="." instance=ExtResource("2_xob6f")]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+animation = &"Right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 22)
+shape = SubResource("CircleShape2D_m8ynl")
