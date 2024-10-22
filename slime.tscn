@@ -13,7 +13,7 @@ script = ExtResource("1_tp258")
 unique_name_in_owner = true
 texture_filter = 1
 animation = &"Left"
-frame_progress = 0.700581
+frame_progress = 0.884994
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
