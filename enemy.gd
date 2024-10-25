@@ -25,7 +25,7 @@ func get_direction(velocity) -> String:
 
 
 func _on_hurt_box_hurt(damage: Variant) -> void:
-	hp -= 1
+	hp -= damage
 	if hp <= 0:
 		queue_free()
 	print("Slime HP:", hp)

@@ -15,7 +15,9 @@ radius = 13.0
 radius = 8.0
 
 [node name="Slime_Enemy" type="CharacterBody2D"]
-platform_floor_layers = 4294901760
+collision_layer = 4
+collision_mask = 4
+platform_floor_layers = 4278190080
 script = ExtResource("1_tp258")
 
 [node name="SlimeAnimation" parent="." instance=ExtResource("2_oek4o")]
@@ -28,8 +30,9 @@ frame_progress = 0.471821
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_r5nd8")
 
-[node name="HurtBox" parent="." instance=ExtResource("3_f630k")]
+[node name="HurtBox" parent="." groups=["enemy-hurtbox"] instance=ExtResource("3_f630k")]
 collision_mask = 4
+HurtBoxType = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_ph1av")

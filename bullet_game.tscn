@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://ffrd2npquunb"]
+[gd_scene load_steps=8 format=3 uid="uid://ffrd2npquunb"]
 
 [ext_resource type="PackedScene" uid="uid://c4yinprjl1ui4" path="res://player.tscn" id="1_sm0lf"]
 [ext_resource type="Texture2D" uid="uid://btx2vhqcr1maf" path="res://Grass.png" id="2_a7ibw"]
-[ext_resource type="PackedScene" uid="uid://dbylwf4vme53v" path="res://slime.tscn" id="3_yxjax"]
+[ext_resource type="PackedScene" uid="uid://bccfgphfpdu4w" path="res://enemy_spawner.tscn" id="3_r176m"]
+[ext_resource type="Script" path="res://spawn_info.gd" id="4_1lmnu"]
+[ext_resource type="PackedScene" uid="uid://dbylwf4vme53v" path="res://slime.tscn" id="5_4vj48"]
+
+[sub_resource type="Resource" id="Resource_rescx"]
+script = ExtResource("4_1lmnu")
+time_start = 0
+time_end = 10
+enemy = ExtResource("5_4vj48")
+enemy_count = 1
+enemy_spawn_interval = 1
+
+[sub_resource type="Resource" id="Resource_c1dnu"]
+script = ExtResource("4_1lmnu")
+time_start = 5
+time_end = 50
+enemy = ExtResource("5_4vj48")
+enemy_count = 10
+enemy_spawn_interval = 2
 
 [node name="Game" type="Node2D"]
 
@@ -14,22 +32,7 @@ texture = ExtResource("2_a7ibw")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
-[node name="Ocelot_Player" parent="." instance=ExtResource("1_sm0lf")]
+[node name="Ocelot_Player" parent="." groups=["Player"] instance=ExtResource("1_sm0lf")]
 
-[node name="Slime_Enemy" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(-204, -89)
-
-[node name="Slime_Enemy2" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(266, -57)
-
-[node name="Slime_Enemy3" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(262, 29)
-
-[node name="Slime_Enemy4" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(72, 137)
-
-[node name="Slime_Enemy5" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(-185, 73)
-
-[node name="Slime_Enemy6" parent="." instance=ExtResource("3_yxjax")]
-position = Vector2(68, -85)
+[node name="EnemySpawner" parent="." instance=ExtResource("3_r176m")]
+spawns = Array[ExtResource("4_1lmnu")]([SubResource("Resource_rescx"), SubResource("Resource_c1dnu")])
