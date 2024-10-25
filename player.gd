@@ -31,3 +31,8 @@ func get_direction(velocity) -> String:
 		horizontal = "Right"
 	
 	return vertical + horizontal
+
+
+func _on_hurt_box_hurt(damage: Variant) -> void:
+	hp -= damage
+	print("Player HP:", hp)
