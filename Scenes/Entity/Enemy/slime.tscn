@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://dbylwf4vme53v"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_1srcm"]
+[ext_resource type="PackedScene" uid="uid://bq8vs0fyhbaar" path="res://Sprites/Slime.aseprite" id="2_ce8tl"]
+[ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Scenes/HurtBox.tscn" id="3_ua5bj"]
+[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Scenes/HitBox.tscn" id="4_jxwnq"]
+[ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Scenes/HealthComponent.tscn" id="5_q1oj0"]
+[ext_resource type="PackedScene" uid="uid://dfs7hf1kw24hg" path="res://MovementComponent.tscn" id="6_t6sea"]
+[ext_resource type="Script" path="res://Scenes/Entity/Enemy/EnemyMovement.gd" id="7_up0ou"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5nd8"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ph1av"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5bm7"]
+radius = 8.0
+
+[node name="Slime_Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+platform_floor_layers = 4278190080
+script = ExtResource("1_1srcm")
+damage = 2
+
+[node name="SlimeAnimation" parent="." instance=ExtResource("2_ce8tl")]
+unique_name_in_owner = true
+texture_filter = 1
+frame_progress = 0.471821
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_r5nd8")
+
+[node name="HurtBox" parent="." groups=["enemy-hurtbox"] instance=ExtResource("3_ua5bj")]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_ph1av")
+
+[node name="HitBox" parent="." instance=ExtResource("4_jxwnq")]
+collision_mask = 10
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_k5bm7")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_q1oj0")]
+unique_name_in_owner = true
+max_health = 10
+hurtbox = NodePath("../HurtBox")
+
+[node name="MovementComponent" parent="." instance=ExtResource("6_t6sea")]
+
+[node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("7_up0ou")
+
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

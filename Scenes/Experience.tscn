@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://hexgwgefiqab"]
+
+[ext_resource type="Script" path="res://Scripts/Experience.gd" id="1_n4kmd"]
+[ext_resource type="Script" path="res://Scenes/ExpAnimation.gd" id="2_g8bya"]
+[ext_resource type="PackedScene" uid="uid://4fajhkraglll" path="res://Sprites/ExpDrop.aseprite" id="3_217m2"]
+[ext_resource type="Script" path="res://Scenes/LootCollectAnimation.gd" id="4_nhy4p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7h82"]
+radius = 6.0
+
+[node name="Loot" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_n4kmd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p7h82")
+
+[node name="AnimationComponent" type="Node2D" parent="."]
+script = ExtResource("2_g8bya")
+
+[node name="ExpDropAnimation" parent="AnimationComponent" instance=ExtResource("3_217m2")]
+texture_filter = 1
+frame = 1
+frame_progress = 0.723343
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("4_nhy4p")

@@ -1,0 +1,102 @@
+[gd_scene load_steps=17 format=3 uid="uid://c4yinprjl1ui4"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jqfuj"]
+[ext_resource type="PackedScene" uid="uid://dbaym8bse2f4v" path="res://Sprites/Ocelot_Front_Walk.aseprite" id="2_xob6f"]
+[ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Scenes/HurtBox.tscn" id="3_5dbqp"]
+[ext_resource type="PackedScene" uid="uid://djs4rbfuh0ge6" path="res://Scenes/weapon.tscn" id="4_mjsbf"]
+[ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Scenes/HealthComponent.tscn" id="5_ahsys"]
+[ext_resource type="PackedScene" uid="uid://dfs7hf1kw24hg" path="res://MovementComponent.tscn" id="6_mfdp4"]
+[ext_resource type="Script" path="res://Scenes/Entity/PlayerAnimation.gd" id="7_4y6gy"]
+[ext_resource type="Script" path="res://PlayerMovement.gd" id="7_7f6op"]
+[ext_resource type="Script" path="res://Scenes/Entity/PlayerExperience.gd" id="9_knuy8"]
+[ext_resource type="Script" path="res://Scenes/Entity/Pickup.gd" id="10_wcyik"]
+[ext_resource type="Script" path="res://Scenes/Entity/CollectLoot.gd" id="11_k8ic7"]
+[ext_resource type="Script" path="res://Scenes/Entity/upgrade_component.gd" id="12_yf4ri"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gllpu"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a2acb"]
+radius = 4.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk01p"]
+radius = 70.0071
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5f1c"]
+radius = 12.1655
+
+[node name="Ocelot_Player" type="CharacterBody2D"]
+texture_filter = 1
+texture_repeat = 2
+collision_layer = 2
+collision_mask = 2
+platform_floor_layers = 4278190080
+script = ExtResource("1_jqfuj")
+
+[node name="OcelotWalkAnimation" parent="." instance=ExtResource("2_xob6f")]
+unique_name_in_owner = true
+animation = &"Up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_gllpu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource("3_5dbqp")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_a2acb")
+
+[node name="Weapon" parent="." instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_ahsys")]
+max_health = 100
+hurtbox = NodePath("../HurtBox")
+
+[node name="MovementComponent" parent="." instance=ExtResource("6_mfdp4")]
+script = ExtResource("7_7f6op")
+movement_speed = 60
+
+[node name="AnimationComponent" type="Node" parent="."]
+script = ExtResource("7_4y6gy")
+
+[node name="ExperienceComponent" type="Node" parent="." node_paths=PackedStringArray("pickupBox")]
+script = ExtResource("9_knuy8")
+experience_per_level = 5
+pickupBox = NodePath("../PickupArea")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("10_wcyik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_yk01p")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("11_k8ic7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_g5f1c")
+
+[node name="UpgradeComponent" type="Node" parent="." node_paths=PackedStringArray("weapon")]
+script = ExtResource("12_yf4ri")
+weapon = NodePath("../Weapon")
+
+[connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
+[connection signal="leveled" from="ExperienceComponent" to="UpgradeComponent" method="_on_experience_component_leveled"]
+[connection signal="area_entered" from="PickupArea" to="PickupArea" method="_on_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="CollectArea" method="_on_area_entered"]
+[connection signal="collect_experience" from="CollectArea" to="ExperienceComponent" method="_on_collect_area_collect_experience"]
+
+[editable path="HurtBox"]
