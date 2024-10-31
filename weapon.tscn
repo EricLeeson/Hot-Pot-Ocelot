@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://djs4rbfuh0ge6"]
+
+[ext_resource type="Script" path="res://Player/Scripts/weapon.gd" id="1_75gvh"]
+[ext_resource type="Script" path="res://Weapons/Components/Scripts/WeaponAiming.gd" id="2_bp04j"]
+[ext_resource type="Script" path="res://Weapons/Components/Scripts/WeaponShooter.gd" id="3_tm0oq"]
+[ext_resource type="PackedScene" uid="uid://bmvuuqjnsj4ds" path="res://Weapons/Components/Scenes/ShootingOrigin.tscn" id="4_hshbs"]
+[ext_resource type="Script" path="res://Weapons/Components/Scripts/WeaponUpgrade.gd" id="5_05bh2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t1uoq"]
+radius = 250.0
+
+[node name="Weapon" type="Area2D"]
+scale = Vector2(1, 1.00796)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_75gvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t1uoq")
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+autostart = true
+
+[node name="AimingComponent" type="Node2D" parent="."]
+script = ExtResource("2_bp04j")
+
+[node name="ShootingComponent" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_tm0oq")
+shooting_origin = ExtResource("4_hshbs")
+
+[node name="ShootingOrigin" parent="ShootingComponent" instance=ExtResource("4_hshbs")]
+unique_name_in_owner = true
+script = null
+
+[node name="UpgradesComponent" type="Node2D" parent="."]
+script = ExtResource("5_05bh2")
+shooting_origin = ExtResource("4_hshbs")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ShootTimer" to="ShootingComponent" method="_on_timer_timeout"]
+[connection signal="new_upgrade" from="UpgradesComponent" to="." method="_on_upgrades_component_new_upgrade"]

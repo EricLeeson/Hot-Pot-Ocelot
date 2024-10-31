@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b12j1k4ebjfm0"]
+
+[ext_resource type="Script" path="res://Weapons/NoodleWeapons/NoodleBullet.gd" id="1_1xqkn"]
+[ext_resource type="Texture2D" uid="uid://dwmqym0ovdwqb" path="res://Art/Weapons/RamenBulletIcon.png" id="2_yo0eh"]
+[ext_resource type="PackedScene" uid="uid://copvc26wbasrg" path="res://Art/Weapons/RamenBullet.aseprite" id="3_4j26w"]
+[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Components/Scenes/HitBox.tscn" id="4_c22j0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6rxq"]
+radius = 14.0
+
+[node name="RamenBullet" type="Node2D" groups=["attack"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+script = ExtResource("1_1xqkn")
+projectile_velocity = 200.0
+max_pierce = 3
+fire_rate = 2.0
+weapon_name = "Ramen Bullet"
+icon = ExtResource("2_yo0eh")
+
+[node name="BulletAnimation" parent="." instance=ExtResource("3_4j26w")]
+texture_filter = 1
+
+[node name="HitBox" parent="." instance=ExtResource("4_c22j0")]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CircleShape2D_b6rxq")
+
+[connection signal="enemy_hit" from="HitBox" to="." method="_on_hit_box_enemy_hit"]
+
+[editable path="HitBox"]

@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bs6rbteugufj6"]
+
+[ext_resource type="FontFile" uid="uid://dig2h7bh4p5d2" path="res://Font/PixeloidMono-d94EV.ttf" id="1_gnaa6"]
+[ext_resource type="Texture2D" uid="uid://bqug8048gwoos" path="res://Art/GUI/WeaponUpgradeButtonFrame.aseprite" id="1_trwuu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfkla"]
+texture = ExtResource("1_trwuu")
+texture_margin_left = 47.0
+texture_margin_top = 70.0
+texture_margin_right = 47.0
+texture_margin_bottom = 70.0
+modulate_color = Color(0.601223, 0.601223, 0.601223, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u0dms"]
+texture = ExtResource("1_trwuu")
+texture_margin_left = 47.0
+texture_margin_top = 50.0
+texture_margin_right = 47.0
+texture_margin_bottom = 50.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xpkrj"]
+texture = ExtResource("1_trwuu")
+texture_margin_left = 51.9173
+texture_margin_top = 60.0
+texture_margin_right = 36.248
+texture_margin_bottom = 60.0
+region_rect = Rect2(0, 0, 85.0023, 145.693)
+
+[resource]
+default_font = ExtResource("1_gnaa6")
+Button/styles/hover = SubResource("StyleBoxTexture_sfkla")
+Button/styles/normal = SubResource("StyleBoxTexture_u0dms")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_xpkrj")

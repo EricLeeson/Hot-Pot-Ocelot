@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cagmjpmmcfm0k"]
+
+[ext_resource type="Script" path="res://Weapons/MeatWeapons/MeatBullet.gd" id="1_bjx5k"]
+[ext_resource type="Texture2D" uid="uid://bmweh5x123gl3" path="res://Art/Weapons/FishBallBulletIcon.aseprite" id="2_uem3p"]
+[ext_resource type="PackedScene" uid="uid://cgxjk8dw368am" path="res://Art/Weapons/FishBallBullet.aseprite" id="3_8phxx"]
+[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Components/Scenes/HitBox.tscn" id="4_pxneq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xvrlt"]
+radius = 7.0
+
+[node name="FishBallBullet" type="Node2D" groups=["attack", "non-piercing-projectile"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+script = ExtResource("1_bjx5k")
+projectile_velocity = 300.0
+max_pierce = 4
+fire_rate = 3.0
+weapon_name = "Fish Ball Bullet"
+icon = ExtResource("2_uem3p")
+damage = 15.0
+
+[node name="BulletAnimation" parent="." instance=ExtResource("3_8phxx")]
+texture_filter = 1
+
+[node name="HitBox" parent="." instance=ExtResource("4_pxneq")]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CircleShape2D_xvrlt")
+
+[connection signal="enemy_hit" from="HitBox" to="." method="_on_hit_box_enemy_hit"]
+
+[editable path="HitBox"]

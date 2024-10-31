@@ -1,0 +1,280 @@
+[gd_scene load_steps=18 format=3 uid="uid://bmltlgfs1jsla"]
+
+[ext_resource type="Script" path="res://GUI/Scripts/GUI.gd" id="1_vn8es"]
+[ext_resource type="Texture2D" uid="uid://cpc4kd5yrcnf7" path="res://Art/GUI/EXPBar.aseprite" id="4_7r862"]
+[ext_resource type="Script" path="res://GUI/Scenes/WeaponHUD.gd" id="4_25tky"]
+[ext_resource type="Script" path="res://GUI/Scripts/ExperienceBar.gd" id="4_gvdde"]
+[ext_resource type="Script" path="res://GUI/Scripts/LevelUpScreen.gd" id="5_mxdhv"]
+[ext_resource type="Texture2D" uid="uid://b0qfsn1tfe8d1" path="res://Art/GUI/EXPProgress.aseprite" id="5_ypi35"]
+[ext_resource type="Theme" uid="uid://dlepfb0swx7sw" path="res://Resources/Themes/WeaponHUDTheme.tres" id="6_n7p2x"]
+[ext_resource type="Texture2D" uid="uid://bn37r6m5fu77m" path="res://Art/GUI/ProgressBarShadow.aseprite" id="7_1fnrb"]
+[ext_resource type="Texture2D" uid="uid://b47avp0vtur1e" path="res://Art/GUI/HPBar.aseprite" id="8_bdd2m"]
+[ext_resource type="Texture2D" uid="uid://cvpvcowhxa5b0" path="res://Art/GUI/HPProgress.aseprite" id="9_f7obg"]
+[ext_resource type="Texture2D" uid="uid://i56oouplgx0d" path="res://Art/GUI/WeaponHUDPotBackground.aseprite" id="10_arer5"]
+[ext_resource type="Script" path="res://GUI/Scenes/HPBar.gd" id="10_i881q"]
+[ext_resource type="Script" path="res://GUI/Scenes/GameTimer.gd" id="12_4od4i"]
+[ext_resource type="Texture2D" uid="uid://bnocghgen12jb" path="res://Art/GUI/GenericFrameBorder.aseprite" id="13_552rx"]
+
+[sub_resource type="Theme" id="Theme_2ts6n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6kads"]
+texture = ExtResource("13_552rx")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
+
+[sub_resource type="Theme" id="Theme_1vpgx"]
+Panel/styles/panel = SubResource("StyleBoxTexture_6kads")
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_vn8es")
+
+[node name="LevelUp" type="Panel" parent="."]
+process_mode = 2
+offset_right = 640.0
+offset_bottom = 360.0
+theme = SubResource("Theme_2ts6n")
+script = ExtResource("5_mxdhv")
+
+[node name="Label" type="Label" parent="LevelUp"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 640.0
+offset_bottom = 103.0
+text = "Pick One"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="HBoxContainer" parent="LevelUp"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 110.0
+offset_right = 530.0
+offset_bottom = 270.0
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="WeaponHUD" type="Panel" parent="."]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 150.0
+grow_vertical = 0
+theme = ExtResource("6_n7p2x")
+script = ExtResource("4_25tky")
+
+[node name="ExpBar" type="TextureProgressBar" parent="WeaponHUD"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 27.0
+offset_right = 142.0
+offset_bottom = 41.0
+theme = ExtResource("6_n7p2x")
+max_value = 5.0
+texture_under = ExtResource("7_1fnrb")
+texture_over = ExtResource("4_7r862")
+texture_progress = ExtResource("5_ypi35")
+texture_progress_offset = Vector2(15, 0)
+script = ExtResource("4_gvdde")
+
+[node name="ExpBarLabel" type="Label" parent="WeaponHUD/ExpBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = -3.0
+offset_right = 38.0
+offset_bottom = 4.0
+theme_override_font_sizes/font_size = 5
+text = "Level 1"
+
+[node name="HPBar" type="TextureProgressBar" parent="WeaponHUD"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 142.0
+offset_bottom = 22.0
+value = 100.0
+texture_under = ExtResource("7_1fnrb")
+texture_over = ExtResource("8_bdd2m")
+texture_progress = ExtResource("9_f7obg")
+texture_progress_offset = Vector2(15, 0)
+script = ExtResource("10_i881q")
+
+[node name="HPBarLabel" type="Label" parent="WeaponHUD/HPBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="BrothWeapon" type="Control" parent="WeaponHUD"]
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponHUD/BrothWeapon"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 47.0
+offset_right = 29.0
+offset_bottom = 72.0
+texture = ExtResource("10_arer5")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHUD/BrothWeapon"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 47.0
+offset_right = 29.0
+offset_bottom = 72.0
+expand_mode = 3
+stretch_mode = 3
+
+[node name="MeatWeapon" type="Control" parent="WeaponHUD"]
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponHUD/MeatWeapon"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 47.0
+offset_right = 145.0
+offset_bottom = 72.0
+texture = ExtResource("10_arer5")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHUD/MeatWeapon"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 47.0
+offset_right = 145.0
+offset_bottom = 72.0
+expand_mode = 3
+stretch_mode = 3
+
+[node name="SpiceWeapon" type="Control" parent="WeaponHUD"]
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponHUD/SpiceWeapon"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 47.0
+offset_right = 58.0
+offset_bottom = 72.0
+texture = ExtResource("10_arer5")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHUD/SpiceWeapon"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 47.0
+offset_right = 58.0
+offset_bottom = 72.0
+expand_mode = 3
+stretch_mode = 3
+
+[node name="VegetableWeapon" type="Control" parent="WeaponHUD"]
+anchors_preset = 0
+offset_right = 24.0
+offset_bottom = 25.0
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponHUD/VegetableWeapon"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 47.0
+offset_right = 116.0
+offset_bottom = 72.0
+texture = ExtResource("10_arer5")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHUD/VegetableWeapon"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 47.0
+offset_right = 116.0
+offset_bottom = 72.0
+expand_mode = 3
+stretch_mode = 3
+
+[node name="NoodleWeapon" type="Control" parent="WeaponHUD"]
+anchors_preset = 0
+offset_right = 25.0
+offset_bottom = 25.0
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponHUD/NoodleWeapon"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 47.0
+offset_right = 87.0
+offset_bottom = 72.0
+texture = ExtResource("10_arer5")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHUD/NoodleWeapon"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 47.0
+offset_right = 87.0
+offset_bottom = 72.0
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="WeaponHUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -1.0
+offset_right = 14.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "Weapons"
+horizontal_alignment = 1
+
+[node name="TimeDisplay" type="Panel" parent="."]
+texture_filter = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -58.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_1vpgx")
+
+[node name="GameTimer" type="Label" parent="TimeDisplay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -10.0
+offset_right = 21.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("12_4od4i")
+
+[node name="Timer" type="Timer" parent="TimeDisplay/GameTimer"]
+autostart = true
+
+[connection signal="timeout" from="TimeDisplay/GameTimer/Timer" to="TimeDisplay/GameTimer" method="_on_timer_timeout"]

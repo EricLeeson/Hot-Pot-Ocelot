@@ -1,0 +1,136 @@
+[gd_scene load_steps=27 format=3 uid="uid://c4yinprjl1ui4"]
+
+[ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_jqfuj"]
+[ext_resource type="PackedScene" uid="uid://dbaym8bse2f4v" path="res://Art/Player/Ocelot_Front_Walk.aseprite" id="2_xob6f"]
+[ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Components/Scenes/HurtBox.tscn" id="3_5dbqp"]
+[ext_resource type="PackedScene" uid="uid://djs4rbfuh0ge6" path="res://weapon.tscn" id="4_mjsbf"]
+[ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Components/Scenes/HealthComponent.tscn" id="5_ahsys"]
+[ext_resource type="PackedScene" uid="uid://ck544d36wys70" path="res://Player/Scenes/MovementComponent.tscn" id="6_mfdp4"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerAnimation.gd" id="7_4y6gy"]
+[ext_resource type="Script" path="res://Player/PlayerMovement.gd" id="7_7f6op"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerExperience.gd" id="9_knuy8"]
+[ext_resource type="Script" path="res://Player/Scripts/Pickup.gd" id="10_wcyik"]
+[ext_resource type="Script" path="res://Player/Scripts/CollectLoot.gd" id="11_k8ic7"]
+[ext_resource type="Script" path="res://Player/Scripts/PlayerWeapons.gd" id="12_el0wl"]
+[ext_resource type="Script" path="res://Player/Scripts/upgrade_component.gd" id="12_yf4ri"]
+[ext_resource type="PackedScene" uid="uid://y2f1k1t8cbsv" path="res://Weapons/BrothWeapons/BrothBullet.tscn" id="13_twjpj"]
+[ext_resource type="PackedScene" uid="uid://cagmjpmmcfm0k" path="res://Weapons/MeatWeapons/FishBallBullet.tscn" id="15_va0su"]
+[ext_resource type="PackedScene" uid="uid://d3o4cyvy52mvl" path="res://Weapons/MeatWeapons/BeefBallBullet.tscn" id="16_r65sf"]
+[ext_resource type="PackedScene" uid="uid://duhm1cyvdov7j" path="res://Weapons/VegetableWeapons/BokChoyBullet.tscn" id="17_7hgh6"]
+[ext_resource type="PackedScene" uid="uid://t31pgmf64yi6" path="res://Weapons/VegetableWeapons/CabbageBullet.tscn" id="18_gseti"]
+[ext_resource type="PackedScene" uid="uid://cf27k6u8i7w6v" path="res://Weapons/SpiceWeapons/ChiliSeedBullet.tscn" id="19_t5mxs"]
+[ext_resource type="PackedScene" uid="uid://ct8sp0wdfvk3" path="res://Weapons/SpiceWeapons/GarlicBullet.tscn" id="20_pk0fo"]
+[ext_resource type="PackedScene" uid="uid://b12j1k4ebjfm0" path="res://Weapons/NoodleWeapons/RamenBullet.tscn" id="21_jl0hx"]
+[ext_resource type="PackedScene" uid="uid://dqwk7ug30k0nn" path="res://Weapons/NoodleWeapons/WontonBullet.tscn" id="22_232tn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gllpu"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a2acb"]
+radius = 4.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk01p"]
+radius = 70.0071
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5f1c"]
+radius = 12.1655
+
+[node name="Ocelot_Player" type="CharacterBody2D"]
+texture_filter = 1
+texture_repeat = 2
+collision_layer = 2
+collision_mask = 2
+platform_floor_layers = 4278190080
+script = ExtResource("1_jqfuj")
+
+[node name="OcelotWalkAnimation" parent="." instance=ExtResource("2_xob6f")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_gllpu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource("3_5dbqp")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_a2acb")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_ahsys")]
+max_health = 100
+hurtbox = NodePath("../HurtBox")
+
+[node name="MovementComponent" parent="." instance=ExtResource("6_mfdp4")]
+script = ExtResource("7_7f6op")
+movement_speed = 60
+
+[node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("animation")]
+script = ExtResource("7_4y6gy")
+animation = NodePath("../OcelotWalkAnimation")
+
+[node name="ExperienceComponent" type="Node" parent="." node_paths=PackedStringArray("pickupBox")]
+script = ExtResource("9_knuy8")
+experience_per_level = 5
+pickupBox = NodePath("../PickupArea")
+exp_interval = 5
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("10_wcyik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_yk01p")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("11_k8ic7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_g5f1c")
+
+[node name="Weapons" type="Node2D" parent="."]
+script = ExtResource("12_el0wl")
+
+[node name="UpgradeComponent" type="Node" parent="Weapons" node_paths=PackedStringArray("weapon")]
+script = ExtResource("12_yf4ri")
+weapon = NodePath("../BrothWeapon")
+
+[node name="BrothWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+spread_angle = 0.1
+weapon_type = ExtResource("13_twjpj")
+weapon_choices = Array[PackedScene]([ExtResource("13_twjpj")])
+
+[node name="MeatWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+weapon_choices = Array[PackedScene]([ExtResource("16_r65sf"), ExtResource("15_va0su")])
+
+[node name="VegetableWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+weapon_choices = Array[PackedScene]([ExtResource("17_7hgh6"), ExtResource("18_gseti")])
+
+[node name="SpiceWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+spread_angle = 0.1
+weapon_choices = Array[PackedScene]([ExtResource("19_t5mxs"), ExtResource("20_pk0fo")])
+
+[node name="NoodleWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+weapon_choices = Array[PackedScene]([ExtResource("21_jl0hx"), ExtResource("22_232tn")])
+
+[connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
+[connection signal="leveled" from="ExperienceComponent" to="Weapons/UpgradeComponent" method="_on_experience_component_leveled"]
+[connection signal="area_entered" from="PickupArea" to="PickupArea" method="_on_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="CollectArea" method="_on_area_entered"]
+[connection signal="collect_experience" from="CollectArea" to="ExperienceComponent" method="_on_collect_area_collect_experience"]
+
+[editable path="HurtBox"]

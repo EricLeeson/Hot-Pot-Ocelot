@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dlepfb0swx7sw"]
+
+[ext_resource type="Texture2D" uid="uid://bnekmchc538jo" path="res://Art/GUI/WeaponHUDWoodBackground.aseprite" id="1_u0p7y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xofwn"]
+texture = ExtResource("1_u0p7y")
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_xofwn")

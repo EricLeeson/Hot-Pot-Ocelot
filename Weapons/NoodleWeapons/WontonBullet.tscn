@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqwk7ug30k0nn"]
+
+[ext_resource type="Script" path="res://Weapons/NoodleWeapons/NoodleBullet.gd" id="1_qpwnr"]
+[ext_resource type="Texture2D" uid="uid://oledghk3qryx" path="res://Art/Weapons/WontonBulletIcon.png" id="2_myrxb"]
+[ext_resource type="PackedScene" uid="uid://cqontc5cn4thi" path="res://Art/Weapons/WontonBullet.aseprite" id="3_66mbr"]
+[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Components/Scenes/HitBox.tscn" id="4_xx6tr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6rxq"]
+radius = 11.0454
+
+[node name="WontonBullet" type="Node2D" groups=["attack"]]
+top_level = true
+light_mask = 4
+visibility_layer = 4
+script = ExtResource("1_qpwnr")
+projectile_velocity = 200.0
+max_pierce = 5
+fire_rate = 5.0
+weapon_name = "Wonton Bullet"
+icon = ExtResource("2_myrxb")
+damage = 10.0
+
+[node name="BulletAnimation" parent="." instance=ExtResource("3_66mbr")]
+texture_filter = 1
+
+[node name="HitBox" parent="." instance=ExtResource("4_xx6tr")]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CircleShape2D_b6rxq")
+
+[connection signal="enemy_hit" from="HitBox" to="." method="_on_hit_box_enemy_hit"]
+
+[editable path="HitBox"]

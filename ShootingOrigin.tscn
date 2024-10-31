@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmvuuqjnsj4ds"]
-
-[ext_resource type="Script" path="res://Scenes/ShootingOrigin.gd" id="1_hldh0"]
-
-[node name="ShootingOrigin" type="Marker2D"]
-script = ExtResource("1_hldh0")
