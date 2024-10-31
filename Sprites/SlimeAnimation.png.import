@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://341q1xdlbprt"
-path="res://.godot/imported/Slime.png-5861c3cf4f21827cbde41e5558735a77.ctex"
+uid="uid://jc2p2257rijp"
+path="res://.godot/imported/SlimeAnimation.png-c22a8ed1e466b5f845055185ac53127a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Slime.png"
-dest_files=["res://.godot/imported/Slime.png-5861c3cf4f21827cbde41e5558735a77.ctex"]
+source_file="res://Sprites/SlimeAnimation.png"
+dest_files=["res://.godot/imported/SlimeAnimation.png-c22a8ed1e466b5f845055185ac53127a.ctex"]
 
 [params]
 

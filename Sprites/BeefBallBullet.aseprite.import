@@ -2,13 +2,13 @@
 
 importer="Aseprite AnimatedSprite2D Import"
 type="PackedScene"
-uid="uid://bq8vs0fyhbaar"
-path="res://.godot/imported/Slime.aseprite-8bcb6febb210551cfc5a048c01501749.scn"
+uid="uid://cqeo50vd0u06i"
+path="res://.godot/imported/BeefBallBullet.aseprite-71397c713e66706e879f36b9fbdc3f8c.scn"
 
 [deps]
 
-source_file="res://Sprites/Slime.aseprite"
-dest_files=["res://.godot/imported/Slime.aseprite-8bcb6febb210551cfc5a048c01501749.scn"]
+source_file="res://Sprites/BeefBallBullet.aseprite"
+dest_files=["res://.godot/imported/BeefBallBullet.aseprite-71397c713e66706e879f36b9fbdc3f8c.scn"]
 
 [params]
 

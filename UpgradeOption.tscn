@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://bedcxtwq5jwn3"]
+
+[ext_resource type="Texture2D" uid="uid://byklq5ms5o2v3" path="res://Sprites/BrothBulletIcon.png" id="1_7cojx"]
+[ext_resource type="Script" path="res://UpgradeOption.gd" id="1_kyu81"]
+
+[node name="Option" type="Button"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 160)
+offset_right = 100.0
+offset_bottom = 160.0
+script = ExtResource("1_kyu81")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 85.0
+offset_bottom = 90.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 70.0
+texture = ExtResource("1_7cojx")
+
+[node name="NameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 90.0
+offset_right = 85.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 11
+text = "Broth Bullet"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelDescription" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 30.0
+offset_top = 104.0
+offset_right = 70.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 7
+text = "Level 1 -> 2"
+
+[node name="DescriptionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 115.0
+offset_right = 84.0
+offset_bottom = 151.0
+theme_override_font_sizes/font_size = 6
+text = "Projectile Count: 1 -> 2
+Damage: 2 -> 3
+Attack Speed: 0.2 -> 0.3"
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

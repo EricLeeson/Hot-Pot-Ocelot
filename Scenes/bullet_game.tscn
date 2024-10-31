@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ffrd2npquunb"]
+[gd_scene load_steps=9 format=3 uid="uid://ffrd2npquunb"]
 
 [ext_resource type="PackedScene" uid="uid://c4yinprjl1ui4" path="res://Scenes/Entity/player.tscn" id="1_sm0lf"]
 [ext_resource type="Texture2D" uid="uid://btx2vhqcr1maf" path="res://Sprites/Grass.png" id="2_a7ibw"]
 [ext_resource type="PackedScene" uid="uid://bccfgphfpdu4w" path="res://Scenes/enemy_spawner.tscn" id="3_r176m"]
 [ext_resource type="Script" path="res://Scripts/spawn_info.gd" id="4_1lmnu"]
 [ext_resource type="PackedScene" uid="uid://dbylwf4vme53v" path="res://Scenes/Entity/Enemy/slime.tscn" id="5_4vj48"]
+[ext_resource type="PackedScene" uid="uid://bmltlgfs1jsla" path="res://GUI.tscn" id="6_bifdj"]
 
 [sub_resource type="Resource" id="Resource_rescx"]
 script = ExtResource("4_1lmnu")
@@ -35,7 +36,24 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="Ocelot_Player" parent="." groups=["Player"] instance=ExtResource("1_sm0lf")]
 position = Vector2(16, -16)
 
+[node name="OcelotWalkAnimation" parent="Ocelot_Player" index="0"]
+unique_name_in_owner = false
+
 [node name="EnemySpawner" parent="." instance=ExtResource("3_r176m")]
 spawns = Array[ExtResource("4_1lmnu")]([SubResource("Resource_rescx"), SubResource("Resource_c1dnu")])
 
 [node name="Loot" type="Node2D" parent="."]
+
+[node name="GUI" parent="." instance=ExtResource("6_bifdj")]
+
+[node name="ExpBar" parent="GUI/Control" index="0"]
+max_value = 5.0
+allow_greater = true
+
+[connection signal="exp_collected" from="Ocelot_Player/ExperienceComponent" to="GUI" method="_on_experience_component_exp_collected"]
+[connection signal="leveled" from="Ocelot_Player/ExperienceComponent" to="GUI" method="_on_experience_component_leveled"]
+[connection signal="leveled" from="Ocelot_Player/ExperienceComponent" to="GUI/Control/LevelUp" method="_on_experience_component_leveled"]
+
+[editable path="Ocelot_Player"]
+[editable path="Ocelot_Player/HurtBox"]
+[editable path="GUI"]

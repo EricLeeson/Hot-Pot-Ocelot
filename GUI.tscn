@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmltlgfs1jsla"]
+
+[ext_resource type="Texture2D" uid="uid://c6s4h7vf8a1xj" path="res://Textures/GUI/exp_background.png" id="1_8y0jj"]
+[ext_resource type="Script" path="res://GUI.gd" id="1_vn8es"]
+[ext_resource type="Texture2D" uid="uid://nytru5ckoa1i" path="res://Textures/GUI/exp_progress.png" id="2_yacyf"]
+[ext_resource type="Script" path="res://Scenes/ExperienceBar.gd" id="4_gvdde"]
+[ext_resource type="Script" path="res://LevelUpScreen.gd" id="5_mxdhv"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_vn8es")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExpBar" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 8.0
+offset_right = 640.0
+offset_bottom = 28.0
+texture_under = ExtResource("1_8y0jj")
+texture_progress = ExtResource("2_yacyf")
+script = ExtResource("4_gvdde")
+
+[node name="ExpBarLabel" type="Label" parent="Control/ExpBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 13
+text = "Level 1"
+
+[node name="LevelUp" type="Panel" parent="Control"]
+process_mode = 2
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("5_mxdhv")
+
+[node name="Label" type="Label" parent="Control/LevelUp"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 640.0
+offset_bottom = 103.0
+text = "Pick One"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="HBoxContainer" parent="Control/LevelUp"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 110.0
+offset_right = 530.0
+offset_bottom = 270.0
+theme_override_constants/separation = 25
+alignment = 1

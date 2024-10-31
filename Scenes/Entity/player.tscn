@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4yinprjl1ui4"]
+[gd_scene load_steps=21 format=3 uid="uid://c4yinprjl1ui4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jqfuj"]
 [ext_resource type="PackedScene" uid="uid://dbaym8bse2f4v" path="res://Sprites/Ocelot_Front_Walk.aseprite" id="2_xob6f"]
@@ -11,7 +11,11 @@
 [ext_resource type="Script" path="res://Scenes/Entity/PlayerExperience.gd" id="9_knuy8"]
 [ext_resource type="Script" path="res://Scenes/Entity/Pickup.gd" id="10_wcyik"]
 [ext_resource type="Script" path="res://Scenes/Entity/CollectLoot.gd" id="11_k8ic7"]
+[ext_resource type="Script" path="res://Scenes/Entity/PlayerWeapons.gd" id="12_el0wl"]
 [ext_resource type="Script" path="res://Scenes/Entity/upgrade_component.gd" id="12_yf4ri"]
+[ext_resource type="PackedScene" uid="uid://y2f1k1t8cbsv" path="res://Scenes/Weapons/BrothBullet.tscn" id="13_twjpj"]
+[ext_resource type="PackedScene" uid="uid://cagmjpmmcfm0k" path="res://Scenes/Weapons/MeatWeapons/FishBallBullet.tscn" id="15_va0su"]
+[ext_resource type="PackedScene" uid="uid://d3o4cyvy52mvl" path="res://Scenes/Weapons/MeatWeapons/BeefBallBullet.tscn" id="16_r65sf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gllpu"]
 radius = 2.0
@@ -37,7 +41,6 @@ script = ExtResource("1_jqfuj")
 
 [node name="OcelotWalkAnimation" parent="." instance=ExtResource("2_xob6f")]
 unique_name_in_owner = true
-animation = &"Up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
@@ -53,10 +56,6 @@ collision_layer = 2
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_a2acb")
 
-[node name="Weapon" parent="." instance=ExtResource("4_mjsbf")]
-unique_name_in_owner = true
-position = Vector2(0, -7)
-
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_ahsys")]
 max_health = 100
 hurtbox = NodePath("../HurtBox")
@@ -65,13 +64,15 @@ hurtbox = NodePath("../HurtBox")
 script = ExtResource("7_7f6op")
 movement_speed = 60
 
-[node name="AnimationComponent" type="Node" parent="."]
+[node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("animation")]
 script = ExtResource("7_4y6gy")
+animation = NodePath("../OcelotWalkAnimation")
 
 [node name="ExperienceComponent" type="Node" parent="." node_paths=PackedStringArray("pickupBox")]
 script = ExtResource("9_knuy8")
 experience_per_level = 5
 pickupBox = NodePath("../PickupArea")
+exp_interval = 5
 
 [node name="PickupArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -89,12 +90,35 @@ script = ExtResource("11_k8ic7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("CircleShape2D_g5f1c")
 
-[node name="UpgradeComponent" type="Node" parent="." node_paths=PackedStringArray("weapon")]
+[node name="Weapons" type="Node2D" parent="."]
+script = ExtResource("12_el0wl")
+
+[node name="UpgradeComponent" type="Node" parent="Weapons" node_paths=PackedStringArray("weapon")]
 script = ExtResource("12_yf4ri")
-weapon = NodePath("../Weapon")
+weapon = NodePath("../BrothWeapon")
+
+[node name="BrothWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+spread_angle = 0.1
+weapon_type = ExtResource("13_twjpj")
+weapon_choices = Array[PackedScene]([ExtResource("13_twjpj")])
+
+[node name="MeatWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+weapon_choices = Array[PackedScene]([ExtResource("16_r65sf"), ExtResource("15_va0su")])
+
+[node name="VegetableWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+
+[node name="SpiceWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
+
+[node name="NoodleWeapon" parent="Weapons" instance=ExtResource("4_mjsbf")]
+unique_name_in_owner = true
 
 [connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
-[connection signal="leveled" from="ExperienceComponent" to="UpgradeComponent" method="_on_experience_component_leveled"]
+[connection signal="leveled" from="ExperienceComponent" to="Weapons/UpgradeComponent" method="_on_experience_component_leveled"]
 [connection signal="area_entered" from="PickupArea" to="PickupArea" method="_on_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="CollectArea" method="_on_area_entered"]
 [connection signal="collect_experience" from="CollectArea" to="ExperienceComponent" method="_on_collect_area_collect_experience"]

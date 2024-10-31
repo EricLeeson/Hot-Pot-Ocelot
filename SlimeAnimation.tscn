@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6of4y7nmqenp"]
+
+[ext_resource type="PackedScene" uid="uid://bq8vs0fyhbaar" path="res://Sprites/Slime.aseprite" id="1_3bp46"]
+
+[node name="Slime" instance=ExtResource("1_3bp46")]
+texture_filter = 1
+offset = Vector2(-1, -2)
+region_rect = Rect2(0, 0, 28, 24)
