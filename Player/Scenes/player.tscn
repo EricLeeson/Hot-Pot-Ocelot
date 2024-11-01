@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player/Scripts/player.gd" id="1_jqfuj"]
 [ext_resource type="PackedScene" uid="uid://dbaym8bse2f4v" path="res://Art/Player/Ocelot_Front_Walk.aseprite" id="2_xob6f"]
 [ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Components/Scenes/HurtBox.tscn" id="3_5dbqp"]
-[ext_resource type="PackedScene" uid="uid://djs4rbfuh0ge6" path="res://weapon.tscn" id="4_mjsbf"]
+[ext_resource type="PackedScene" uid="uid://djs4rbfuh0ge6" path="res://Weapons/weapon.tscn" id="4_mjsbf"]
 [ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Components/Scenes/HealthComponent.tscn" id="5_ahsys"]
 [ext_resource type="PackedScene" uid="uid://ck544d36wys70" path="res://Player/Scenes/MovementComponent.tscn" id="6_mfdp4"]
 [ext_resource type="Script" path="res://Player/Scripts/PlayerAnimation.gd" id="7_4y6gy"]

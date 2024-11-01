@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://GUI/Scripts/UpgradeOption.gd" id="2_sk2l2"]
 [ext_resource type="Texture2D" uid="uid://c1d6ell4y0hv6" path="res://Art/GUI/WeaponUpgradeIconFrame.aseprite" id="3_7c5mg"]
 [ext_resource type="Texture2D" uid="uid://cbu3gwbggtue6" path="res://Art/Weapons/BeefBallBulletIcon.aseprite" id="4_gwy21"]
-[ext_resource type="LabelSettings" uid="uid://by1y6hdwmxsj6" path="res://new_label_settings.tres" id="5_vv2yc"]
+[ext_resource type="LabelSettings" uid="uid://by1y6hdwmxsj6" path="res://Resources/Themes/new_label_settings.tres" id="5_vv2yc"]
 
 [sub_resource type="Theme" id="Theme_8xj6q"]
 
