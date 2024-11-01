@@ -14,11 +14,11 @@ light_mask = 4
 visibility_layer = 4
 script = ExtResource("1_3guod")
 projectile_velocity = 150.0
-max_pierce = 3
-fire_rate = 0.3
+max_pierce = 2
+fire_rate = 0.5
 weapon_name = "Broth Bullet"
 icon = ExtResource("2_6jbwb")
-damage = 3.0
+damage = 4.0
 hitbox = NodePath("HitBox")
 
 [node name="BulletAnimation" parent="." instance=ExtResource("3_085pl")]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmltlgfs1jsla"]
+[gd_scene load_steps=24 format=3 uid="uid://bmltlgfs1jsla"]
 
 [ext_resource type="Script" path="res://GUI/Scripts/GUI.gd" id="1_vn8es"]
 [ext_resource type="Texture2D" uid="uid://cpc4kd5yrcnf7" path="res://Art/GUI/EXPBar.aseprite" id="4_7r862"]
-[ext_resource type="Script" path="res://GUI/Scenes/WeaponHUD.gd" id="4_25tky"]
+[ext_resource type="Script" path="res://GUI/Scripts/WeaponHUD.gd" id="4_25tky"]
 [ext_resource type="Script" path="res://GUI/Scripts/ExperienceBar.gd" id="4_gvdde"]
 [ext_resource type="Script" path="res://GUI/Scripts/LevelUpScreen.gd" id="5_mxdhv"]
 [ext_resource type="Texture2D" uid="uid://b0qfsn1tfe8d1" path="res://Art/GUI/EXPProgress.aseprite" id="5_ypi35"]
@@ -11,9 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://b47avp0vtur1e" path="res://Art/GUI/HPBar.aseprite" id="8_bdd2m"]
 [ext_resource type="Texture2D" uid="uid://cvpvcowhxa5b0" path="res://Art/GUI/HPProgress.aseprite" id="9_f7obg"]
 [ext_resource type="Texture2D" uid="uid://i56oouplgx0d" path="res://Art/GUI/WeaponHUDPotBackground.aseprite" id="10_arer5"]
-[ext_resource type="Script" path="res://GUI/Scenes/HPBar.gd" id="10_i881q"]
-[ext_resource type="Script" path="res://GUI/Scenes/GameTimer.gd" id="12_4od4i"]
+[ext_resource type="Script" path="res://GUI/Scripts/HPBar.gd" id="10_i881q"]
+[ext_resource type="Script" path="res://GUI/Scripts/GameTimer.gd" id="12_4od4i"]
 [ext_resource type="Texture2D" uid="uid://bnocghgen12jb" path="res://Art/GUI/GenericFrameBorder.aseprite" id="13_552rx"]
+[ext_resource type="Script" path="res://GUI/Scenes/DeathScreen.gd" id="15_fpmyg"]
+[ext_resource type="Theme" uid="uid://rlugp5hfcs55" path="res://Resources/Themes/GenericButton.tres" id="15_r37ot"]
+[ext_resource type="Script" path="res://GUI/PlayAgainButton.gd" id="15_uoslk"]
+[ext_resource type="Script" path="res://GUI/ExitButton.gd" id="16_6um7e"]
+[ext_resource type="FontFile" uid="uid://dyy7rluy28ebr" path="res://Font/PixeloidSansBold-PKnYd.ttf" id="17_k37ia"]
 
 [sub_resource type="Theme" id="Theme_2ts6n"]
 
@@ -26,6 +31,10 @@ texture_margin_bottom = 30.0
 
 [sub_resource type="Theme" id="Theme_1vpgx"]
 Panel/styles/panel = SubResource("StyleBoxTexture_6kads")
+
+[sub_resource type="LabelSettings" id="LabelSettings_avbco"]
+font = ExtResource("17_k37ia")
+font_size = 24
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_vn8es")
@@ -257,6 +266,7 @@ grow_vertical = 0
 theme = SubResource("Theme_1vpgx")
 
 [node name="GameTimer" type="Label" parent="TimeDisplay"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -274,7 +284,86 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("12_4od4i")
 
-[node name="Timer" type="Timer" parent="TimeDisplay/GameTimer"]
+[node name="ScoreTimer" type="Timer" parent="TimeDisplay/GameTimer"]
 autostart = true
 
-[connection signal="timeout" from="TimeDisplay/GameTimer/Timer" to="TimeDisplay/GameTimer" method="_on_timer_timeout"]
+[node name="Death" type="Panel" parent="."]
+process_mode = 2
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -80.0
+offset_right = 120.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_r37ot")
+script = ExtResource("15_fpmyg")
+
+[node name="DeathScreenLabel" type="Label" parent="Death"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 25.0
+offset_right = 95.0
+offset_bottom = 55.0
+grow_horizontal = 2
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_avbco")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Death"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -17.0
+offset_right = 95.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Death"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -65.0
+offset_right = 95.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayAgain" type="Button" parent="Death/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("15_r37ot")
+text = "Play Again"
+script = ExtResource("15_uoslk")
+
+[node name="Exit" type="Button" parent="Death/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("15_r37ot")
+text = "Quit
+"
+script = ExtResource("16_6um7e")
+
+[connection signal="timeout" from="TimeDisplay/GameTimer/ScoreTimer" to="TimeDisplay/GameTimer" method="_on_timer_timeout"]
+[connection signal="pressed" from="Death/HBoxContainer/PlayAgain" to="Death" method="_on_play_again_pressed"]
+[connection signal="pressed" from="Death/HBoxContainer/Exit" to="Death" method="_on_exit_pressed"]

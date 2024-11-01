@@ -15,9 +15,10 @@ visibility_layer = 4
 script = ExtResource("1_kqhca")
 projectile_velocity = 300.0
 max_pierce = 1
-fire_rate = 0.075
+fire_rate = 0.1
 weapon_name = "Chili Seed Bullet"
 icon = ExtResource("2_xtb2o")
+damage = 1.0
 
 [node name="BulletAnimation" parent="." instance=ExtResource("3_vqsg0")]
 texture_filter = 1

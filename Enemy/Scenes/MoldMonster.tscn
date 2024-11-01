@@ -1,15 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbylwf4vme53v"]
+[gd_scene load_steps=16 format=3 uid="uid://ca2c8gh35nvhs"]
 
-[ext_resource type="Script" path="res://Enemy/Scripts/enemy.gd" id="1_u01fr"]
-[ext_resource type="PackedScene" uid="uid://cqvvyyv8u564x" path="res://Art/Enemies/SlimeAnimation.aseprite" id="2_27jo3"]
-[ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Components/Scenes/HurtBox.tscn" id="3_urml4"]
-[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Components/Scenes/HitBox.tscn" id="4_yekg5"]
-[ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Components/Scenes/HealthComponent.tscn" id="5_2nqr7"]
-[ext_resource type="PackedScene" uid="uid://ck544d36wys70" path="res://Player/Scenes/MovementComponent.tscn" id="6_j5nrs"]
-[ext_resource type="Script" path="res://Enemy/Scripts/EnemyAnimation.gd" id="7_p2n8p"]
+[ext_resource type="Script" path="res://Enemy/Scripts/enemy.gd" id="1_kycor"]
+[ext_resource type="PackedScene" uid="uid://eqpq41ritc25" path="res://Art/Enemies/MoldMonster.aseprite" id="2_cl2hw"]
+[ext_resource type="PackedScene" uid="uid://cm8c6ryfkoutb" path="res://Components/Scenes/HurtBox.tscn" id="3_syrj5"]
+[ext_resource type="PackedScene" uid="uid://c3b2uv8csyxoc" path="res://Components/Scenes/HitBox.tscn" id="4_qo8dt"]
+[ext_resource type="PackedScene" uid="uid://b1ospd2nores3" path="res://Components/Scenes/HealthComponent.tscn" id="5_fmxbt"]
+[ext_resource type="PackedScene" uid="uid://ck544d36wys70" path="res://Player/Scenes/MovementComponent.tscn" id="6_1udqj"]
+[ext_resource type="Script" path="res://Enemy/Scripts/EnemyAnimation.gd" id="7_5lji7"]
 
-[sub_resource type="Animation" id="Animation_ywa5i"]
-length = 0.15
+[sub_resource type="Animation" id="Animation_wkkes"]
+length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1, 0)]
+"values": [Vector2(-1, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -32,11 +32,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Rect2i(0, 0, 28, 28)]
+"values": [Rect2i(46, 84, 46, 42)]
 }
 
-[sub_resource type="Animation" id="Animation_5vx3t"]
-length = 0.15
+[sub_resource type="Animation" id="Animation_gcg8v"]
+length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-1, 0)]
+"values": [Vector2(1, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -59,11 +59,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Rect2i(28, 0, 28, 28)]
+"values": [Rect2i(0, 45, 46, 42)]
 }
 
-[sub_resource type="Animation" id="Animation_8al1q"]
-length = 0.7
+[sub_resource type="Animation" id="Animation_3isem"]
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -72,10 +72,10 @@ tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.35),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(0, 1), Vector2(0, 3)]
+"values": [Vector2(-1, 1), Vector2(-1, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -84,14 +84,14 @@ tracks/1/path = NodePath(".:region_rect")
 tracks/1/interp = 0
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.35),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Rect2i(0, 28, 25, 26), Rect2i(56, 0, 31, 22)]
+"values": [Rect2i(0, 0, 45, 45), Rect2i(90, 0, 46, 42)]
 }
 
-[sub_resource type="Animation" id="Animation_fk4ar"]
-length = 0.7
+[sub_resource type="Animation" id="Animation_27y07"]
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -100,10 +100,10 @@ tracks/0/path = NodePath(".:offset")
 tracks/0/interp = 0
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.35),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(1, 1), Vector2(1, 3)]
+"values": [Vector2(2, 1), Vector2(1, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -112,18 +112,18 @@ tracks/1/path = NodePath(".:region_rect")
 tracks/1/interp = 0
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.35),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Rect2i(25, 28, 25, 26), Rect2i(56, 22, 31, 22)]
+"values": [Rect2i(45, 0, 45, 45), Rect2i(90, 42, 46, 42)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kafye"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbrps"]
 _data = {
-"HurtLeft": SubResource("Animation_ywa5i"),
-"HurtRight": SubResource("Animation_5vx3t"),
-"Left": SubResource("Animation_8al1q"),
-"Right": SubResource("Animation_fk4ar")
+"HurtLeft": SubResource("Animation_wkkes"),
+"HurtRight": SubResource("Animation_gcg8v"),
+"Left": SubResource("Animation_3isem"),
+"Right": SubResource("Animation_27y07")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r5nd8"]
@@ -135,56 +135,54 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_k5bm7"]
 radius = 8.0
 
-[node name="Slime_Enemy" type="CharacterBody2D"]
+[node name="MoldMonsterEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
 platform_floor_layers = 4278190080
-script = ExtResource("1_u01fr")
-damage = 5
-exp_amount = 1
+script = ExtResource("1_kycor")
+damage = 10
+exp_amount = 5
 
-[node name="SlimeAnimation" parent="." instance=ExtResource("2_27jo3")]
-texture_filter = 1
-offset = Vector2(-1, 0)
-region_rect = Rect2(28, 0, 28, 28)
+[node name="MoldMonster" parent="." instance=ExtResource("2_cl2hw")]
+offset = Vector2(-1, 2)
+region_rect = Rect2(46, 84, 46, 42)
 
-[node name="AnimationPlayer" parent="SlimeAnimation" index="0"]
+[node name="AnimationPlayer" parent="MoldMonster" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_kafye")
+"": SubResource("AnimationLibrary_cbrps")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_r5nd8")
 
-[node name="HurtBox" parent="." groups=["enemy-hurtbox"] instance=ExtResource("3_urml4")]
+[node name="HurtBox" parent="." groups=["enemy-hurtbox"] instance=ExtResource("3_syrj5")]
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_ph1av")
 
-[node name="HitBox" parent="." instance=ExtResource("4_yekg5")]
+[node name="HitBox" parent="." instance=ExtResource("4_qo8dt")]
 collision_mask = 10
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_k5bm7")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_2nqr7")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_fmxbt")]
 unique_name_in_owner = true
-max_health = 20
+max_health = 75
 hurtbox = NodePath("../HurtBox")
 
-[node name="MovementComponent" parent="." instance=ExtResource("6_j5nrs")]
-movement_speed = 25
+[node name="MovementComponent" parent="." instance=ExtResource("6_1udqj")]
 
 [node name="AnimationComponent" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
-script = ExtResource("7_p2n8p")
-animation_player = NodePath("../SlimeAnimation/AnimationPlayer")
+script = ExtResource("7_5lji7")
+animation_player = NodePath("../MoldMonster/AnimationPlayer")
 
 [connection signal="damaged" from="HurtBox" to="AnimationComponent" method="_on_hurt_box_damaged"]
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 
-[editable path="SlimeAnimation"]
+[editable path="MoldMonster"]
 [editable path="HurtBox"]
 [editable path="HitBox"]
